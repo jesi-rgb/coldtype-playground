@@ -1,0 +1,4 @@
+*.mp4
+*.wav
+renders/
+.DS_Store
