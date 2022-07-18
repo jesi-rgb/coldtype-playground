@@ -44,7 +44,7 @@ def rafa(f):
     )
 
 
-@animation((800, 800), timeline=tl, bg=hsl(h, 0.5, 0.8), render_bg=1)
+# @animation((800, 800), timeline=tl, bg=hsl(h, 0.5, 0.8), render_bg=1)
 def quieres(f):
     color = hsl(h, 0.5, 0.8)
     return (
@@ -113,29 +113,35 @@ def webazo(f):
     )
 
 
-# @animation((800, 800), timeline=tl)
+@animation((800, 800), timeline=tl)
 def trispace(f):
-    circle = P().oval(f.a.r.inset(250)).reverse().align(f.a.r)
+    circle = (
+        P()
+        .oval(f.a.r.inset(150))
+        .reverse()
+        .f(rgb255(234, 100, 100).darker(0.4))
+        .align(f.a.r)
+    )
     return PS(
         [
             P().rect(f.a.r).f(rgb255(234, 100, 100)),
+            circle,
             StSt(
-                "Rosanita",
+                "Thanks so much!",
                 trispace_f,
                 80,
                 wght=1,
                 ro=1,
-                tu=1300 - f.e("ceio", loops=1) * 2000,
+                # tu=1300 - f.e("ceio", loops=1) * 2000,
+                tu=0,
                 # rotate=-40 + f.adj(-g.i * 4).e("eeio", loops=2) * 80,
                 fit=circle.length(),
             )
             .understroke(sw=10)
             .f(1)
-            .distribute_on_path(circle, offset=200)
-            .scale(1.5, 1.5)
-            .rotate(f.e("ceio", loops=1) * 720, point=f.a.r.pc)
-            .ch(phototype(f.a.r, blur=2, cut=120, cutw=60))
-            # .align(f.a.r),
+            .distribute_on_path(circle, offset=f.e("ceio", loops=1) * 400)
+            # .rotate(f.e("ceio", loops=1) * 720, point=f.a.r.pc)
+            .ch(phototype(f.a.r, blur=2, cut=120, cutw=60)),
         ]
     )
 
@@ -307,4 +313,4 @@ def tourney(f: Frame):
 
 
 def release(passes):
-    FFMPEGExport(quieres, passes).h264().write()
+    FFMPEGExport(trispace, passes).gif().write()
